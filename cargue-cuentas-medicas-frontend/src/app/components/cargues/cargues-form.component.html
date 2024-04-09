@@ -1,0 +1,56 @@
+<div class="card text-bg-light mb-3">
+  <div class="card-header">{{titulo}}</div>
+  <div class="card-body">
+    <button class="btn btn-secondary my-2" routerLink="/cargues">Volver</button>
+
+    <form>
+      <div class="form-group">
+        <label for="mes">Mes</label>
+        <select  
+          [(ngModel)]="model.mes" name="mes" id="mes" class="form-control">
+          <option [ngValue]="undefined">Seleccionar un mes</option>
+          <option *ngFor="let mes of meses" [ngValue]="mes.descripcion">{{mes.descripcion}}</option>
+        </select>        
+        <div class="alert alert-danger" *ngIf="error?.mes">{{ error.mes }}</div>
+      </div>
+
+      <div class="form-group">
+        <label for="anio">Año</label>
+        <select  
+          [(ngModel)]="model.anio" name="anio" id="anio" class="form-control">
+          <option [ngValue]="undefined">Seleccionar un año</option>
+          <option *ngFor="let anio of anios" [ngValue]="anio.descripcion">{{anio.descripcion}}</option>
+        </select>        
+        <div class="alert alert-danger" *ngIf="error?.anio">{{ error.anio }}</div>
+
+      </div>
+
+      <div class="form-group"> 
+        <label for="anio">Tipo de Servicio</label>      
+        <select  
+          [(ngModel)]="model.tipoServicio" name="servicio" id="servicio" class="form-control">
+          <option [ngValue]="undefined">Seleccionar un tipo de servicio</option>
+          <option *ngFor="let servicio of tipoServicios" [ngValue]="servicio.descripcion">{{servicio.descripcion}}</option>
+        </select>        
+        <div class="alert alert-danger" *ngIf="error?.servicio">{{ error.servicio }}</div>
+
+      </div>
+
+
+      <div class="form-group">
+        <div class="mb-3">
+          <label for="formFileSm" class="form-label"></label>
+          <input (change)="seleccionarArchivo($event)" class="form-control form-control-sm" id="formFileSm" type="file"
+          [disabled]="model.id ? true : null" >
+        </div>
+      </div>
+
+      <br />
+      <div class="form-group">
+        <button type="button" class="btn btn-primary" (click)="model.id? editar(): crear()">
+          {{ model.id? 'Editar': 'Crear'}}</button>
+      </div>
+
+    </form>
+  </div>
+</div>
